@@ -13,7 +13,7 @@ namespace AbstractSecurityShopServiceDAL.ViewModel
         public string CustomerFIO { get; set; }
         public string TechnicsName { get; set; }
         public int Count { get; set; }
-        public decimal Sum { get; set; }
+        public int Sum { get; set; }
         public string Status { get; set; }
         public string DateCreate { get; set; }
         public string DateImplement { get; set; }

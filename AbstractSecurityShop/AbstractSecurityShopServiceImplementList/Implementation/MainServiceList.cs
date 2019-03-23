@@ -70,24 +70,18 @@ namespace AbstractSecurityShopServiceImplementList.Implementation
             var technicEquipments = source.TechnicsEquipment.Where(rec => rec.TechnicsId == element.TechnicsId);
             foreach (var technicEquipment in technicEquipments)
             {
-                int countOnStorage = source.StorageEquipments
-                .Where(rec => rec.EquipmentId == technicEquipment.EquipmentId)
-               .Sum(rec => rec.Count);
+                int countOnStorage = source.StorageEquipments.Where(rec => rec.EquipmentId == technicEquipment.EquipmentId).Sum(rec => rec.Count);
                 if (countOnStorage < technicEquipment.Count * element.Count)
                 {
-                    var EquipmentName = source.Equipments.FirstOrDefault(rec => rec.Id ==
-                   technicEquipment.EquipmentId);
-                    throw new Exception("Не достаточно оборудования " +
-                   EquipmentName?.EquipmentName + " требуется " + (technicEquipment.Count * element.Count) +
-                   ", в наличии " + countOnStorage);
+                    var EquipmentName = source.Equipments.FirstOrDefault(rec => rec.Id == technicEquipment.EquipmentId);
+                    throw new Exception("Не достаточно оборудования " + EquipmentName?.EquipmentName + " требуется " + (technicEquipment.Count * element.Count) + ", в наличии " + countOnStorage);
                 }
             }
             // списываем
             foreach (var technicEquipment in technicEquipments)
             {
                 int countOnStorages = technicEquipment.Count * element.Count;
-                var storageEquipments = source.StorageEquipments.Where(rec => rec.EquipmentId
-               == technicEquipment.EquipmentId);
+                var storageEquipments = source.StorageEquipments.Where(rec => rec.EquipmentId == technicEquipment.EquipmentId);
                 foreach (var storageEquipment in storageEquipments)
                 {
                     // компонентов на одном слкаде может не хватать

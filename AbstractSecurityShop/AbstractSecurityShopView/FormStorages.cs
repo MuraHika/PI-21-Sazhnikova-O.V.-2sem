@@ -49,6 +49,7 @@ namespace AbstractSecurityShopView
                MessageBoxIcon.Error);
             }
         }
+
         private void buttonAdd_Click(object sender, EventArgs e)
         {
             var form = Container.Resolve<FormStorage>();
