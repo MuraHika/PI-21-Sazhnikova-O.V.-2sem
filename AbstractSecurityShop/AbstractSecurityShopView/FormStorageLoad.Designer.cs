@@ -93,6 +93,7 @@
             this.Controls.Add(this.buttonSaveInExcel);
             this.Name = "FormStorageLoad";
             this.Text = "Загруженность хранилищ";
+            this.Load += new System.EventHandler(this.FormStorageLoad_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
 

@@ -38,6 +38,7 @@ namespace AbstractGiftShopView
             currentContainer.RegisterType<ITechnicsService, TechnicsServiceDB>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<IStorageService, StorageServiceDB>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<IMainService, MainServiceDB>(new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<IReptService, ReptServiceDB>(new HierarchicalLifetimeManager());
             return currentContainer;
         }
     }
