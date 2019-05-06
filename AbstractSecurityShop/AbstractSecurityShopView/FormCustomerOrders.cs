@@ -1,23 +1,19 @@
 ﻿using AbstractSecurityShopServiceDAL.BindingModel;
 using AbstractSecurityShopServiceDAL.Interface;
+using AbstractSecurityShopServiceDAL.ViewModel;
 using Microsoft.Reporting.WinForms;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
-using Unity;
 
 
 namespace AbstractSecurityShopView
 {
     public partial class FormCustomerOrders : Form
     {
-        [Dependency]
-        public new IUnityContainer Container { get; set; }
-        private readonly IReptService service;
-
-        public FormCustomerOrders(IReptService service)
+        public FormCustomerOrders()
         {
             InitializeComponent();
-            this.service = service;
         }
 
         private void FormCustomerOrders_Load(object sender, EventArgs e)
@@ -42,13 +38,15 @@ namespace AbstractSecurityShopView
                 " по " +
                dateTimePickerTo.Value.ToShortDateString());
                 reportViewer.LocalReport.SetParameters(parameter);
-                var dataSource = service.GetCustomerOrders(new ReptBindingModel
-                {
-                    DateFrom = dateTimePickerFrom.Value,
-                    DateTo = dateTimePickerTo.Value
-                });
+                List<CustomerOrdersViewModel> response =
+               APICustomer.PostRequest<ReptBindingModel,
+               List<CustomerOrdersViewModel>>("api/Rept/GetCustomerOrders", new ReptBindingModel
+               {
+                   DateFrom = dateTimePickerFrom.Value,
+                   DateTo = dateTimePickerTo.Value
+               });
                 ReportDataSource source = new ReportDataSource("DataSetOrders",
-               dataSource);
+               response);
                 reportViewer.LocalReport.DataSources.Add(source);
                 reportViewer.RefreshReport();
             }
@@ -75,14 +73,15 @@ namespace AbstractSecurityShopView
             {
                 try
                 {
-                    service.SaveCustomerOrders(new ReptBindingModel
-                    {
-                        FileName = sfd.FileName,
-                        DateFrom = dateTimePickerFrom.Value,
-                        DateTo = dateTimePickerTo.Value
-                    });
+                    APICustomer.PostRequest<ReptBindingModel,
+                   bool>("api/Rept/SaveCustomerOrders", new ReptBindingModel
+                   {
+                       FileName = sfd.FileName,
+                       DateFrom = dateTimePickerFrom.Value,
+                       DateTo = dateTimePickerTo.Value
+                   });
                     MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
+                   MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
                 {

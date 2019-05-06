@@ -1,5 +1,6 @@
 ﻿using AbstractSecurityShopServiceDAL.BindingModel;
 using AbstractSecurityShopServiceDAL.Interface;
+using AbstractSecurityShopServiceDAL.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,27 +10,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Unity;
 
 namespace AbstractSecurityShopView
 {
     public partial class FormStorageLoad : Form
     {
-        [Dependency]
-        public new IUnityContainer Container { get; set; }
-        private readonly IReptService service;
 
-        public FormStorageLoad(IReptService service)
+        public FormStorageLoad()
         {
             InitializeComponent();
-            this.service = service;
         }
 
         private void FormStorageLoad_Load(object sender, EventArgs e)
         {
             try
             {
-                var dict = service.GetStorageLoad();
+                var dict = APICustomer.GetRequest<List<StorageLoadViewModel>>("api/Rept/GetStoragesLoad");
                 if (dict != null)
                 {
                     dataGridView.Rows.Clear();
@@ -62,7 +58,7 @@ namespace AbstractSecurityShopView
             {
                 try
                 {
-                    service.SaveStorageLoad(new ReptBindingModel
+                    APICustomer.PostRequest<ReptBindingModel, bool>("api/Rept/SaveStoragesLoad", new ReptBindingModel
                     {
                         FileName = sfd.FileName
                     });

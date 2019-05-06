@@ -10,7 +10,7 @@ namespace AbstractSecurityShopServiceImplementDataBase
 {
     public class AbstractSecurityShopDbContext : DbContext
     {
-        public AbstractSecurityShopDbContext() : base("AbstractSecurityShopDatabase")
+        public AbstractSecurityShopDbContext() : base("AbstractSecurityShopDatabase1")
         {
             Configuration.ProxyCreationEnabled = false;
             Configuration.LazyLoadingEnabled = false;

@@ -10,23 +10,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Unity;
 
 namespace AbstractSecurityShopView
 {
     public partial class FormTechnics : Form
     {
-        [Dependency]
-        public new IUnityContainer Container { get; set; }
         public int Id { set { id = value; } }
-        private readonly ITechnicsService service;
         private int? id;
         private List<TechnicsEquipmentViewModel> technicsEquipment;
 
-        public FormTechnics(ITechnicsService service)
+        public FormTechnics()
         {
             InitializeComponent();
-            this.service = service;
         }
 
         private void FormTechnics_Load(object sender, EventArgs e)
@@ -35,7 +30,7 @@ namespace AbstractSecurityShopView
             {
                 try
                 {
-                    TechnicsViewModel view = service.GetElement(id.Value);
+                    TechnicsViewModel view = APICustomer.GetRequest<TechnicsViewModel>("api/Tecnics/Get/" + id.Value);
                     if (view != null)
                     {
                         textBoxName.Text = view.TechnicsName;
@@ -80,7 +75,7 @@ namespace AbstractSecurityShopView
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<FormTechnicsEquipment>();
+            var form = new FormTechnicsEquipment();
             if (form.ShowDialog() == DialogResult.OK)
             {
                 if (form.Model != null)
@@ -99,7 +94,7 @@ namespace AbstractSecurityShopView
         {
             if (dataGridView.SelectedRows.Count == 1)
             {
-                var form = Container.Resolve<FormTechnicsEquipment>();
+                var form = new FormTechnicsEquipment();
                 form.Model = technicsEquipment[dataGridView.SelectedRows[0].Cells[0].RowIndex];
                 if (form.ShowDialog() == DialogResult.OK)
                 {
@@ -170,7 +165,7 @@ namespace AbstractSecurityShopView
                 }
                 if (id.HasValue)
                 {
-                    service.UpdElement(new TechnicsBindingModel
+                    APICustomer.PostRequest<TechnicsBindingModel, bool>("api/Technics/UpdElement", new TechnicsBindingModel
                     {
                         Id = id.Value,
                         TechnicsName = textBoxName.Text,
@@ -180,7 +175,7 @@ namespace AbstractSecurityShopView
                 }
                 else
                 {
-                    service.AddElement(new TechnicsBindingModel
+                    APICustomer.PostRequest<TechnicsBindingModel, bool>("api/Technics/AddElement", new TechnicsBindingModel
                     {
                         TechnicsName = textBoxName.Text,
                         Price = Convert.ToInt32(textBoxPrice.Text),

@@ -2,30 +2,18 @@
 using AbstractSecurityShopServiceDAL.Interface;
 using AbstractSecurityShopServiceDAL.ViewModel;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Unity;
 
 namespace AbstractSecurityShopView
 {
     public partial class FormEquipment : Form
     {
-        [Dependency]
-        public new IUnityContainer Container { get; set; }
         public int Id { set { id = value; } }
-        private readonly IEquipmentService service;
         private int? id;
 
-        public FormEquipment(IEquipmentService service)
+        public FormEquipment()
         {
             InitializeComponent();
-            this.service = service;
         }
 
         private void FormEquipment_Load(object sender, EventArgs e)
@@ -34,11 +22,10 @@ namespace AbstractSecurityShopView
             {
                 try
                 {
-                    EquipmentViewModel view = service.GetElement(id.Value);
-                    if (view != null)
-                    {
-                        textBoxName.Text = view.EquipmentName;
-                    }
+                    EquipmentViewModel equipment =
+                   APICustomer.GetRequest<EquipmentViewModel>("api/Equipment/Get/" + id.Value);
+                    textBoxName.Text = equipment.EquipmentName;
+
                 }
                 catch (Exception ex)
                 {
@@ -60,7 +47,8 @@ namespace AbstractSecurityShopView
             {
                 if (id.HasValue)
                 {
-                    service.UpdElement(new EquipmentBindingModel
+                    APICustomer.PostRequest<EquipmentBindingModel,
+                    bool>("api/Equipment/UpdElement", new EquipmentBindingModel
                     {
                         Id = id.Value,
                         EquipmentName = textBoxName.Text
@@ -68,10 +56,11 @@ namespace AbstractSecurityShopView
                 }
                 else
                 {
-                    service.AddElement(new EquipmentBindingModel
-                    {
-                        EquipmentName = textBoxName.Text
-                    });
+                    APICustomer.PostRequest<EquipmentBindingModel,
+                   bool>("api/Equipment/AddElement", new EquipmentBindingModel
+                   {
+                       EquipmentName = textBoxName.Text
+                   });
                 }
                 MessageBox.Show("Сохранение прошло успешно", "Сообщение",
                MessageBoxButtons.OK, MessageBoxIcon.Information);

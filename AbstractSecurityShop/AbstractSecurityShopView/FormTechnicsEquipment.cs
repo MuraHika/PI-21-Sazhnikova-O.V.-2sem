@@ -9,15 +9,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Unity;
 
 namespace AbstractSecurityShopView
 {
     public partial class FormTechnicsEquipment : Form
     {
-        [Dependency]
-        public new IUnityContainer Container { get; set; }
-
         public TechnicsEquipmentViewModel Model
         {
             set { model = value; }
@@ -26,20 +22,18 @@ namespace AbstractSecurityShopView
                 return model;
             }
         }
-        private readonly IEquipmentService service;
         private TechnicsEquipmentViewModel model;
 
-        public FormTechnicsEquipment(IEquipmentService service)
+        public FormTechnicsEquipment()
         {
             InitializeComponent();
-            this.service = service;
         }
 
         private void FormTechnicsEquipment_Load(object sender, EventArgs e)
         {
             try
             {
-                List<EquipmentViewModel> list = service.GetList();
+                List<EquipmentViewModel> list = APICustomer.GetRequest<List<EquipmentViewModel>>("api/Equipment/GetList");
                 if (list != null)
                 {
                     comboBoxEquipment.DisplayMember = "EquipmentName";

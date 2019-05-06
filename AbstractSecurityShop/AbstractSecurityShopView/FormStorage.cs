@@ -10,21 +10,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Unity;
 
 namespace AbstractSecurityShopView
 {
     public partial class FormStorage : Form
     {
-        [Dependency]
-        public new IUnityContainer Container { get; set; }
         public int Id { set { id = value; } }
-        private readonly IStorageService service;
         private int? id;
-        public FormStorage(IStorageService service)
+        public FormStorage()
         {
             InitializeComponent();
-            this.service = service;
         }
 
         private void FormStorage_Load(object sender, EventArgs e)
@@ -33,11 +28,11 @@ namespace AbstractSecurityShopView
             {
                 try
                 {
-                    StorageViewModel view = service.GetElement(id.Value);
-                    if (view != null)
+                    StorageViewModel list = APICustomer.GetRequest<StorageViewModel>("api/Storage/GetList");
+                    if (list != null)
                     {
-                        textBoxName.Text = view.StorageName;
-                        dataGridView.DataSource = view.StorageEquipment;
+                        textBoxName.Text = list.StorageName;
+                        dataGridView.DataSource = list.StorageEquipment;
                         dataGridView.Columns[0].Visible = false;
                         dataGridView.Columns[1].Visible = false;
                         dataGridView.Columns[2].Visible = false;
@@ -64,18 +59,20 @@ namespace AbstractSecurityShopView
             {
                 if (id.HasValue)
                 {
-                    service.UpdElement(new StorageBindingModel
-                    {
-                        Id = id.Value,
-                        StorageName = textBoxName.Text
-                    });
+                    APICustomer.PostRequest<StorageBindingModel,
+                   bool>("api/Storage/UpdElement", new StorageBindingModel
+                   {
+                       Id = id.Value,
+                       StorageName = textBoxName.Text
+                   });
                 }
                 else
                 {
-                    service.AddElement(new StorageBindingModel
-                    {
-                        StorageName = textBoxName.Text
-                    });
+                    APICustomer.PostRequest<StorageBindingModel,
+                   bool>("api/Storage/AddElement", new StorageBindingModel
+                   {
+                       StorageName = textBoxName.Text
+                   });
                 }
                 MessageBox.Show("Сохранение прошло успешно", "Сообщение",
                MessageBoxButtons.OK, MessageBoxIcon.Information);

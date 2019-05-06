@@ -9,31 +9,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Unity;
 
 namespace AbstractSecurityShopView
 {
     public partial class FormCreateOrder : Form
     {
-        [Dependency]
-        public new IUnityContainer Container { get; set; }
-        private readonly ICustomerService serviceC;
-        private readonly ITechnicsService serviceG;
-        private readonly IMainService serviceM;
 
-        public FormCreateOrder(ICustomerService serviceC, ITechnicsService serviceG, IMainService serviceM)
+        public FormCreateOrder()
         {
             InitializeComponent();
-            this.serviceC = serviceC;
-            this.serviceG = serviceG;
-            this.serviceM = serviceM;
         }
 
         private void FormCreateOrder_Load(object sender, EventArgs e)
         {
             try
             {
-                List<CustomerViewModel> listC = serviceC.GetList();
+                List<CustomerViewModel> listC = APICustomer.GetRequest<List<CustomerViewModel>>("api/Customer/GetList");
                 if (listC != null)
                 {
                     comboBoxCustomer.DisplayMember = "CustomerFIO";
@@ -41,7 +32,7 @@ namespace AbstractSecurityShopView
                     comboBoxCustomer.DataSource = listC;
                     comboBoxCustomer.SelectedItem = null;
                 }
-                List<TechnicsViewModel> listP = serviceG.GetList();
+                List<TechnicsViewModel> listP = APICustomer.GetRequest<List<TechnicsViewModel>>("api/Technics/GetList");
                 if (listP != null)
                 {
                     comboBoxTechnics.DisplayMember = "TechnicsName";
@@ -65,7 +56,7 @@ namespace AbstractSecurityShopView
                 try
                 {
                     int id = Convert.ToInt32(comboBoxTechnics.SelectedValue);
-                    TechnicsViewModel product = serviceG.GetElement(id);
+                    TechnicsViewModel product = APICustomer.GetRequest<TechnicsViewModel>("api/Technics/Get/" + id);
                     int count = Convert.ToInt32(textBoxCount.Text);
                     textBoxSum.Text = (count * product.Price).ToString();
                 }
@@ -107,7 +98,7 @@ namespace AbstractSecurityShopView
             }
             try
             {
-                serviceM.AcceptedOrder(new OrderBindingModel
+                APICustomer.PostRequest<OrderBindingModel, bool>("api/Main/CreateOrder", new OrderBindingModel
                 {
                     CustomerId = Convert.ToInt32(comboBoxCustomer.SelectedValue),
                     TechnicsId = Convert.ToInt32(comboBoxTechnics.SelectedValue),
