@@ -146,6 +146,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Customer.cs" />
+    <Compile Include="Implementer.cs" />
     <Compile Include="Storage.cs" />
     <Compile Include="StorageEquipment.cs" />
     <Compile Include="Technics.cs" />

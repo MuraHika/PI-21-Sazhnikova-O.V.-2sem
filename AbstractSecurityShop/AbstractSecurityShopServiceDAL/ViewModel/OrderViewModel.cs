@@ -19,6 +19,10 @@ namespace AbstractSecurityShopServiceDAL.ViewModel
         [DataMember]
         public string TechnicsName { get; set; }
         [DataMember]
+        public int? ImplementerId { get; set; }
+        [DataMember]
+        public string ImplementerName { get; set; }
+        [DataMember]
         public int Count { get; set; }
         [DataMember]
         public int Sum { get; set; }
