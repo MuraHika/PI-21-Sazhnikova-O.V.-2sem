@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace AbstractSecurityShopServiceDAL.Interface
 {
-    public interface IImplementerService
+    public interface IWorkerService
     {
-        List<ImplementerViewModel> GetList();
-        ImplementerViewModel GetElement(int id);
-        void AddElement(ImplementerBindingModel model);
-        void UpdElement(ImplementerBindingModel model);
+        List<WorkerViewModel> GetList();
+        WorkerViewModel GetElement(int id);
+        void AddElement(WorkerBindingModel model);
+        void UpdElement(WorkerBindingModel model);
         void DelElement(int id);
-        ImplementerViewModel GetFreeWorker();
+        WorkerViewModel GetFreeWorker();
     }
 }

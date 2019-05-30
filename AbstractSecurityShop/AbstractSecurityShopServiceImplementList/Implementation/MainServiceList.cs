@@ -148,5 +148,15 @@ namespace AbstractSecurityShopServiceImplementList.Implementation
                 });
             }
         }
+
+        public List<OrderViewModel> GetFreeOrders()
+        {
+            List<OrderViewModel> result = source.Orders.Where(x => x.Status == OrderStatus.Accepted || x.Status == OrderStatus.NotEnoughRes).Select(rec => new OrderViewModel
+            {
+                Id = rec.Id
+            }).ToList();
+            return result;
+        }
+
     }
 }

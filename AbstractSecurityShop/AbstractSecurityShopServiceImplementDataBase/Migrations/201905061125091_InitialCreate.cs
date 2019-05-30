@@ -3,7 +3,7 @@ namespace AbstractSecurityShopServiceImplementDataBase.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class FirstMigration : DbMigration
+    public partial class InitialCreate : DbMigration
     {
         public override void Up()
         {
@@ -24,7 +24,7 @@ namespace AbstractSecurityShopServiceImplementDataBase.Migrations
                         CustomerId = c.Int(nullable: false),
                         TechnicsId = c.Int(nullable: false),
                         Count = c.Int(nullable: false),
-                        Sum = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        Sum = c.Int(nullable: false),
                         Status = c.Int(nullable: false),
                         DateCreate = c.DateTime(nullable: false),
                         DateImplement = c.DateTime(),
@@ -41,7 +41,7 @@ namespace AbstractSecurityShopServiceImplementDataBase.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         TechnicsName = c.String(nullable: false),
-                        Price = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        Price = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -53,7 +53,7 @@ namespace AbstractSecurityShopServiceImplementDataBase.Migrations
                         TechnicsId = c.Int(nullable: false),
                         EquipmentId = c.Int(nullable: false),
                         Count = c.Int(nullable: false),
-                        EquipmentName = c.String(nullable: false),
+                        EquipmentName = c.String(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Equipments", t => t.EquipmentId, cascadeDelete: true)
@@ -90,7 +90,7 @@ namespace AbstractSecurityShopServiceImplementDataBase.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        StorageName = c.String(nullable: false),
+                        StorageName = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
             

@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 namespace AbstractSecurityShopServiceDAL.ViewModel
 {
     [DataContract]
-    public class ImplementerViewModel
+    public class WorkerViewModel
     {
         [DataMember]
         public int Id { get; set; }
         [DataMember]
-        public string ImplementerFIO { get; set; }
+        public string WorkerFIO { get; set; }
     }
 }

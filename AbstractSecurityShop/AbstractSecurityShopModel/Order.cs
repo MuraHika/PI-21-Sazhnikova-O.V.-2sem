@@ -12,7 +12,7 @@ namespace AbstractSecurityShopModel
         public int Id { get; set; }
         public int CustomerId { get; set; }
         public int TechnicsId { get; set; }
-        public int? ImplementerId { get; set; }
+        public int? WorkerId { get; set; }
         [Required]
         public int Count { get; set; }
         [Required]
@@ -22,6 +22,6 @@ namespace AbstractSecurityShopModel
         public DateTime? DateImplement { get; set; }
         public virtual Customer Customer { get; set; }
         public virtual Technics Technics { get; set; }
-        public virtual Implementer Implementer { get; set; }
+        public virtual Worker Worker { get; set; }
     }
 }

@@ -53,6 +53,7 @@ namespace AbstractSecurityShopRestApi
             container.RegisterType<IStorageService, StorageServiceDB>(new HierarchicalLifetimeManager());
             container.RegisterType<IMainService, MainServiceDB>(new HierarchicalLifetimeManager());
             container.RegisterType<IReptService, ReptServiceDB>(new HierarchicalLifetimeManager());
+            container.RegisterType<IWorkerService, WorkerServiceDB>(new HierarchicalLifetimeManager());
         }
     }
 }

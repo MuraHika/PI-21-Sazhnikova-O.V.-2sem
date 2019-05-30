@@ -10,6 +10,7 @@ namespace AbstractSecurityShopServiceImplementDataBase.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
+            ContextKey = "AbstractSecurityShopServiceImplementDataBase.AbstractSecurityShopDbContext";
         }
 
         protected override void Seed(AbstractSecurityShopServiceImplementDataBase.AbstractSecurityShopDbContext context)

@@ -28,13 +28,15 @@ namespace AbstractSecurityShopServiceImplementDataBase.Implementation
                 Id = rec.Id,
                 CustomerId = rec.CustomerId,
                 TechnicsId = rec.TechnicsId,
+                WorkerId = rec.WorkerId,
                 DateCreate = SqlFunctions.DateName("dd", rec.DateCreate) + " " + SqlFunctions.DateName("mm", rec.DateCreate) + " " + SqlFunctions.DateName("yyyy", rec.DateCreate),
                 DateImplement = rec.DateImplement == null ? "" : SqlFunctions.DateName("dd", rec.DateImplement.Value) + " " + SqlFunctions.DateName("mm", rec.DateImplement.Value) + " " + SqlFunctions.DateName("yyyy", rec.DateImplement.Value),
                 Status = rec.Status.ToString(),
                 Count = rec.Count,
                 Sum = rec.Sum,
                 CustomerFIO = rec.Customer.CustomerFIO,
-                TechnicsName = rec.Technics.TechnicsName
+                TechnicsName = rec.Technics.TechnicsName,
+                WorkerName = rec.Worker.WorkerFIO
             }).ToList();
             return result;
         }
@@ -96,6 +98,7 @@ namespace AbstractSecurityShopServiceImplementDataBase.Implementation
                             throw new Exception("Не достаточно компонента " + TechnicsEquipment.Equipment.EquipmentName + " требуется " + TechnicsEquipment.Count + ", не хватает " + countOnStorages);
                         }
                     }
+                    //element.WorkerId = model.WorkerId;
                     element.DateImplement = DateTime.Now;
                     element.Status = OrderStatus.Processed;
                     context.SaveChanges();
@@ -156,6 +159,15 @@ namespace AbstractSecurityShopServiceImplementDataBase.Implementation
                 });
             }
             context.SaveChanges();
+        }
+
+        public List<OrderViewModel> GetFreeOrders()
+        {
+            List<OrderViewModel> result = context.Orders.Where(x => x.Status == OrderStatus.Accepted || x.Status == OrderStatus.NotEnoughRes).Select(rec => new OrderViewModel
+            {
+                Id = rec.Id
+            }).ToList();
+            return result;
         }
     }
 }

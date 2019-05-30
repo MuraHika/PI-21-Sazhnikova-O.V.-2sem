@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 namespace AbstractSecurityShopServiceDAL.BindingModel
 {
     [DataContract]
-    public class ImplementerBindingModel
+    public class WorkerBindingModel
     {
         [DataMember]
         public int Id { get; set; }
         [DataMember]
-        public string ImplementerFIO { get; set; }
+        public string WorkerFIO { get; set; }
     }
 }
