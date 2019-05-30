@@ -196,6 +196,7 @@
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\EquipmentController.cs" />
     <Compile Include="Controllers\MainController.cs" />
+    <Compile Include="Controllers\MessageInfoController.cs" />
     <Compile Include="Controllers\ReptController.cs" />
     <Compile Include="Controllers\StorageController.cs" />
     <Compile Include="Controllers\TechnicsController.cs" />
