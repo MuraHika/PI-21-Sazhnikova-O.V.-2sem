@@ -98,7 +98,6 @@ namespace AbstractSecurityShopServiceImplementDataBase.Implementation
                             throw new Exception("Не достаточно компонента " + TechnicsEquipment.Equipment.EquipmentName + " требуется " + TechnicsEquipment.Count + ", не хватает " + countOnStorages);
                         }
                     }
-                    //element.WorkerId = model.WorkerId;
                     element.DateImplement = DateTime.Now;
                     element.Status = OrderStatus.Processed;
                     context.SaveChanges();
@@ -124,7 +123,8 @@ namespace AbstractSecurityShopServiceImplementDataBase.Implementation
                 throw new Exception("Заказ не в статусе \"Выполняется\"");
             }
             element.Status = OrderStatus.Ready;
-            context.SaveChanges();
+            context.SaveChanges();
+
         }
 
         public void OrderPaid(OrderBindingModel model)
