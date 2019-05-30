@@ -20,11 +20,13 @@ namespace AbstractSecurityShopView
         [Dependency]
         public new IUnityContainer Container { get; set; }
         private readonly IMainService service;
+        private readonly IReptService reptService;
 
-        public FormMain(IMainService service)
+        public FormMain(IMainService service, IReptService reptService)
         {
             InitializeComponent();
             this.service = service;
+            this.reptService = reptService;
         }
 
         private void LoadData()
@@ -142,6 +144,43 @@ namespace AbstractSecurityShopView
         private void пополнитьХранилищеToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = Container.Resolve<FormPutOnStorage>();
+            form.ShowDialog();
+        }
+
+        private void прайсТехникиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog
+            {
+                Filter = "doc|*.doc|docx|*.docx"
+            };
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    reptService.SaveTechnicsPrice(new ReptBindingModel
+                    {
+                        FileName = sfd.FileName
+                    });
+                    MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
+                   MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void загруженностьХранилищToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormStorageLoad>();
+            form.ShowDialog();
+        }
+
+        private void заказыЗаказчиковToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormCustomerOrders>();
             form.ShowDialog();
         }
     }

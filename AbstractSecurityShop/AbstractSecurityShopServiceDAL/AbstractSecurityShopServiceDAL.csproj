@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BindingModel\CustomerBindingModel.cs" />
+    <Compile Include="BindingModel\ReptBindingModel.cs" />
     <Compile Include="BindingModel\StorageBindingModel.cs" />
     <Compile Include="BindingModel\StorageEquipmentBindingModel.cs" />
     <Compile Include="BindingModel\TechnicsBindingModel.cs" />
@@ -60,13 +61,16 @@
     <Compile Include="BindingModel\EquipmentBindingModel.cs" />
     <Compile Include="BindingModel\OrderBindingModel.cs" />
     <Compile Include="Interface\ICustomerService.cs" />
+    <Compile Include="Interface\IReptService.cs" />
     <Compile Include="Interface\IStorageService.cs" />
     <Compile Include="Interface\ITechnicsService.cs" />
     <Compile Include="Interface\IMainService.cs" />
     <Compile Include="Interface\IEquipmentService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\CustomerOrdersViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModel.cs" />
     <Compile Include="ViewModel\StorageEquipmentViewModel.cs" />
+    <Compile Include="ViewModel\StorageLoadViewModel.cs" />
     <Compile Include="ViewModel\StorageViewModel.cs" />
     <Compile Include="ViewModel\TechnicsEquipmentViewModel.cs" />
     <Compile Include="ViewModel\TechnicsViewModel.cs" />
