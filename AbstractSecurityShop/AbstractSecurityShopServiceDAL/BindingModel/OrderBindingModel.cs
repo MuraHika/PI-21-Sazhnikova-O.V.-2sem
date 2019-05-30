@@ -12,6 +12,6 @@ namespace AbstractSecurityShopServiceDAL.BindingModel
         public int CustomerId { get; set; }
         public int TechnicsId { get; set; }
         public int Count { get; set; }
-        public decimal Sum { get; set; }
+        public int Sum { get; set; }
     }
 }

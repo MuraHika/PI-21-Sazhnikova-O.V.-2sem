@@ -8,6 +8,9 @@ using System.Windows.Forms;
 using Unity;
 using Unity.Lifetime;
 using AbstractSecurityShopView;
+using System.Data.Entity;
+using AbstractSecurityShopServiceImplementDataBase.Implementation;
+using AbstractSecurityShopServiceImplementDataBase;
 
 namespace AbstractGiftShopView
 {
@@ -29,16 +32,12 @@ namespace AbstractGiftShopView
         public static IUnityContainer BuildUnityContainer()
         {
             var currentContainer = new UnityContainer();
-            currentContainer.RegisterType<ICustomerService, CustomerServiceList>(new
-           HierarchicalLifetimeManager());
-            currentContainer.RegisterType<IEquipmentService, EquipmentServiceList>(new
-           HierarchicalLifetimeManager());
-            currentContainer.RegisterType<ITechnicsService, TechnicsServiceList>(new
-           HierarchicalLifetimeManager());
-            currentContainer.RegisterType<IMainService, MainServiceList>(new
-           HierarchicalLifetimeManager());
-            currentContainer.RegisterType<IStorageService, StorageServiceList>(new
-           HierarchicalLifetimeManager());
+            currentContainer.RegisterType<DbContext, AbstractSecurityShopDbContext>(new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<ICustomerService, CustomerServiceDB>(new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<IEquipmentService, EquipmentServiceDB>(new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<ITechnicsService, TechnicsServiceDB>(new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<IStorageService, StorageServiceDB>(new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<IMainService, MainServiceDB>(new HierarchicalLifetimeManager());
             return currentContainer;
         }
     }

@@ -10,7 +10,7 @@ namespace AbstractSecurityShopServiceDAL.ViewModel
     {
         public int Id { get; set; }
         public string TechnicsName { get; set; }
-        public decimal Price { get; set; }
+        public int Price { get; set; }
         public List<TechnicsEquipmentViewModel> TechnicsEquipment { get; set; }
     }
 }

@@ -11,7 +11,7 @@ namespace AbstractSecurityShopServiceDAL.BindingModel
     {
         public int Id { get; set; }
         public string TechnicsName { get; set; }
-        public decimal Price { get; set; }
+        public int Price { get; set; }
         public List<TechnicsEquipmentBindingModel> TechnicsEquipment{ get; set; }
     }
 }
