@@ -64,7 +64,7 @@ namespace AbstractSecurityShopView
             if (id.HasValue)
             {
                 APICustomer.PostRequest<CustomerBindingModel,
-               bool>("api/Equipment/UpdElement", new CustomerBindingModel
+               bool>("api/Customer/UpdElement", new CustomerBindingModel
                {
                    Id = id.Value,
                    CustomerFIO = fio,
@@ -74,7 +74,7 @@ namespace AbstractSecurityShopView
             else
             {
                 APICustomer.PostRequest<CustomerBindingModel,
-               bool>("api/Equipment/AddElement", new CustomerBindingModel
+               bool>("api/Customer/AddElement", new CustomerBindingModel
                {
                    CustomerFIO = fio,
                    Mail = mail

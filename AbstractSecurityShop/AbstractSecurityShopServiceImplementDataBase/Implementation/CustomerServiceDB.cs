@@ -21,7 +21,8 @@ namespace AbstractSecurityShopServiceImplementDataBase.Implementation
             List<CustomerViewModel> result = context.Customers.Select(rec => new CustomerViewModel
             {
                 Id = rec.Id,
-                CustomerFIO = rec.CustomerFIO
+                CustomerFIO = rec.CustomerFIO,
+                Mail = rec.Mail
             }).ToList();
             return result;
         }
