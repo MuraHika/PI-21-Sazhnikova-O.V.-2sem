@@ -21,7 +21,8 @@ namespace AbstractSecurityShopServiceImplementDataBase.Implementation
             List<CustomerViewModel> result = context.Customers.Select(rec => new CustomerViewModel
             {
                 Id = rec.Id,
-                CustomerFIO = rec.CustomerFIO
+                CustomerFIO = rec.CustomerFIO,
+                Mail = rec.Mail
             }).ToList();
             return result;
         }
@@ -34,7 +35,15 @@ namespace AbstractSecurityShopServiceImplementDataBase.Implementation
                 return new CustomerViewModel
                 {
                     Id = element.Id,
-                    CustomerFIO = element.CustomerFIO
+                    CustomerFIO = element.CustomerFIO,
+                    Mail = element.Mail,
+                    Messages = context.MessageInfos.Where(recM => recM.CustomerId == element.Id).Select(recM => new MessageInfoViewModel
+                    {
+                        MessageId = recM.MessageId,
+                        DateDelivery = recM.DateDelivery,
+                        Subject = recM.Subject,
+                        Body = recM.Body
+                    }).ToList()
                 };
             }
             throw new Exception("Клиент не найден");
@@ -49,7 +58,8 @@ namespace AbstractSecurityShopServiceImplementDataBase.Implementation
             }
             context.Customers.Add(new Customer
             {
-                CustomerFIO = model.CustomerFIO
+                CustomerFIO = model.CustomerFIO,
+                Mail = model.Mail
             });
             context.SaveChanges();
         }
@@ -67,6 +77,7 @@ namespace AbstractSecurityShopServiceImplementDataBase.Implementation
                 throw new Exception("Клиент не найден");
             }
             element.CustomerFIO = model.CustomerFIO;
+            element.Mail = model.Mail;
             context.SaveChanges();
         }
 

@@ -126,6 +126,7 @@
       <HintPath>..\packages\System.ComponentModel.Annotations.4.5.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.3.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.5.1\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
@@ -164,6 +165,7 @@
     <Compile Include="Implementation\CustomerServiceDB.cs" />
     <Compile Include="Implementation\EquipmentServiceDB.cs" />
     <Compile Include="Implementation\MainServiceDB.cs" />
+    <Compile Include="Implementation\MessageInfoServiceDB.cs" />
     <Compile Include="Implementation\ReptServiceDB.cs" />
     <Compile Include="Implementation\StorageServiceDB.cs" />
     <Compile Include="Implementation\TechnicsServiceDB.cs" />
@@ -175,6 +177,18 @@
     <Compile Include="Migrations\201905281846546_s.cs" />
     <Compile Include="Migrations\201905281846546_s.Designer.cs">
       <DependentUpon>201905281846546_s.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905300839103_messageinfoadd.cs" />
+    <Compile Include="Migrations\201905300839103_messageinfoadd.Designer.cs">
+      <DependentUpon>201905300839103_messageinfoadd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905300857556_messageinfoaddnew.cs" />
+    <Compile Include="Migrations\201905300857556_messageinfoaddnew.Designer.cs">
+      <DependentUpon>201905300857556_messageinfoaddnew.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906131622222_mMigr.cs" />
+    <Compile Include="Migrations\201906131622222_mMigr.Designer.cs">
+      <DependentUpon>201906131622222_mMigr.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -209,6 +223,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905281846546_s.resx">
       <DependentUpon>201905281846546_s.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905300839103_messageinfoadd.resx">
+      <DependentUpon>201905300839103_messageinfoadd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905300857556_messageinfoaddnew.resx">
+      <DependentUpon>201905300857556_messageinfoaddnew.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906131622222_mMigr.resx">
+      <DependentUpon>201906131622222_mMigr.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

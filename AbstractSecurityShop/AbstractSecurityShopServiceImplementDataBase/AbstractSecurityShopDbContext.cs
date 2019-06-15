@@ -24,5 +24,6 @@ namespace AbstractSecurityShopServiceImplementDataBase
         public virtual DbSet<Storage> Storages { get; set; }
         public virtual DbSet<StorageEquipment> StorageEquipments { get; set; }
         public virtual DbSet<Worker> Workers { get; set; }
+        public virtual DbSet<MessageInfo> MessageInfos { get; set; }
     }
 }
