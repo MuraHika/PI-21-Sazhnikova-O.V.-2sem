@@ -77,5 +77,17 @@ namespace AbstractSecurityShopRestApi.Controllers
                 new WorkWorker(_service, _serviceWorker, impl.Id, order.Id);
             }
         }
+
+        [HttpGet]
+        public IHttpActionResult GetInfo()
+        {
+            ReflectionService service = new ReflectionService();
+            var list = service.GetInfoByAssembly();
+            if (list == null)
+            {
+                InternalServerError(new Exception("Нет данных"));
+            }
+            return Ok(list);
+        }
     }
 }
