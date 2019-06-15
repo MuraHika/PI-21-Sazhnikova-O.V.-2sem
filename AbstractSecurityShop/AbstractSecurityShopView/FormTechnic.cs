@@ -1,4 +1,5 @@
-﻿using AbstractSecurityShopServiceDAL.Interface;
+﻿using AbstractSecurityShopServiceDAL.BindingModel;
+using AbstractSecurityShopServiceDAL.Interface;
 using AbstractSecurityShopServiceDAL.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -9,20 +10,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Unity;
 
 namespace AbstractSecurityShopView
 {
     public partial class FormTechnic : Form
     {
-        [Dependency]
-        public new IUnityContainer Container { get; set; }
-        private readonly ITechnicsService service;
-
-        public FormTechnic(ITechnicsService service)
+        public FormTechnic()
         {
             InitializeComponent();
-            this.service = service;
         }
 
         private void FormTechnic_Load(object sender, EventArgs e)
@@ -34,7 +29,7 @@ namespace AbstractSecurityShopView
         {
             try
             {
-                List<TechnicsViewModel> list = service.GetList();
+                List<TechnicsViewModel> list = APICustomer.GetRequest<List<TechnicsViewModel>>("api/Technics/GetList/");
                 if (list != null)
                 {
                     dataGridView.DataSource = list;
@@ -52,7 +47,7 @@ namespace AbstractSecurityShopView
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<FormTechnics>();
+            var form = new FormTechnics();
             if (form.ShowDialog() == DialogResult.OK)
             {
                 LoadData();
@@ -63,7 +58,7 @@ namespace AbstractSecurityShopView
         {
             if (dataGridView.SelectedRows.Count == 1)
             {
-                var form = Container.Resolve<FormTechnics>();
+                var form = new FormTechnics();
                 form.Id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                 if (form.ShowDialog() == DialogResult.OK)
                 {
@@ -82,7 +77,7 @@ namespace AbstractSecurityShopView
                     int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                     try
                     {
-                        service.DelElement(id);
+                        APICustomer.PostRequest<TechnicsBindingModel, bool>("api/Technics/DelElement", new TechnicsBindingModel { Id = id });
                     }
                     catch (Exception ex)
                     {

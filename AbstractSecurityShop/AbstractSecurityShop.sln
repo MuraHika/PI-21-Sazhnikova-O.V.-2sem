@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbstractSecurityShopView", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbstractSecurityShopServiceImplementDataBase", "AbstractSecurityShopServiceImplementDataBase\AbstractSecurityShopServiceImplementDataBase.csproj", "{AD6A5035-63E2-4A48-ADE1-9AE415DDD04B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbstractSecurityShopRestApi", "AbstractSecurityShopRestApi\AbstractSecurityShopRestApi.csproj", "{A884C7BB-EABE-479D-8D57-B3C50FD73960}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{AD6A5035-63E2-4A48-ADE1-9AE415DDD04B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD6A5035-63E2-4A48-ADE1-9AE415DDD04B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD6A5035-63E2-4A48-ADE1-9AE415DDD04B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A884C7BB-EABE-479D-8D57-B3C50FD73960}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A884C7BB-EABE-479D-8D57-B3C50FD73960}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A884C7BB-EABE-479D-8D57-B3C50FD73960}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A884C7BB-EABE-479D-8D57-B3C50FD73960}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

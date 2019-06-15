@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Unity;
 using AbstractSecurityShopServiceDAL.ViewModel;
 using AbstractSecurityShopServiceDAL.BindingModel;
 
@@ -15,24 +14,16 @@ namespace AbstractSecurityShopView
 {
     public partial class FormPutOnStorage : Form
     {
-        [Dependency]
-        public new IUnityContainer Container { get; set; }
-        private readonly IStorageService serviceS;
-        private readonly IEquipmentService serviceE;
-        private readonly IMainService serviceM;
-        public FormPutOnStorage(IStorageService serviceS, IEquipmentService serviceE, IMainService serviceM)
+        public FormPutOnStorage()
         {
             InitializeComponent();
-            this.serviceS = serviceS;
-            this.serviceE = serviceE;
-            this.serviceM = serviceM;
         }
 
         private void FormPutOnStorage_Load(object sender, EventArgs e)
         {
             try
             {
-                List<EquipmentViewModel> listE = serviceE.GetList();
+                List<EquipmentViewModel> listE = APICustomer.GetRequest<List<EquipmentViewModel>>("api/Equipment/GetList");
                 if (listE != null)
                 {
                     comboBoxEquipment.DisplayMember = "EquipmentName";
@@ -40,7 +31,7 @@ namespace AbstractSecurityShopView
                     comboBoxEquipment.DataSource = listE;
                     comboBoxEquipment.SelectedItem = null;
                 }
-                List<StorageViewModel> listS = serviceS.GetList();
+                List<StorageViewModel> listS = APICustomer.GetRequest<List<StorageViewModel>>("api/Storage/GetList");
                 if (listS != null)
                 {
                     comboBoxStorage.DisplayMember = "StorageName";
@@ -78,7 +69,7 @@ namespace AbstractSecurityShopView
             }
             try
             {
-                serviceM.PutEquipmentOnStorage(new StorageEquipmentBindingModel
+                APICustomer.PostRequest<StorageEquipmentBindingModel, bool>("api/Main/PutComponentOnStock", new StorageEquipmentBindingModel
                 {
                     EquipmentId = Convert.ToInt32(comboBoxEquipment.SelectedValue),
                     StorageId = Convert.ToInt32(comboBoxStorage.SelectedValue),

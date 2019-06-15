@@ -11,29 +11,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Unity;
 
 namespace AbstractSecurityShopView
 {
     public partial class FormMain : Form
     {
-        [Dependency]
-        public new IUnityContainer Container { get; set; }
-        private readonly IMainService service;
-        private readonly IReptService reptService;
-
-        public FormMain(IMainService service, IReptService reptService)
+        public FormMain()
         {
             InitializeComponent();
-            this.service = service;
-            this.reptService = reptService;
         }
 
         private void LoadData()
         {
             try
             {
-                List<OrderViewModel> list = service.GetList();
+                List<OrderViewModel> list = APICustomer.GetRequest<List<OrderViewModel>>("api/Main/GetList");
                 if (list != null)
                 {
                     dataGridView.DataSource = list;
@@ -53,7 +45,7 @@ namespace AbstractSecurityShopView
 
         private void buttonAcceptedOrder_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<FormCreateOrder>();
+            var form = new FormCreateOrder();
             form.ShowDialog();
             LoadData();
         }
@@ -65,7 +57,11 @@ namespace AbstractSecurityShopView
                 int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                 try
                 {
-                    service.Processed(new OrderBindingModel { Id = id });
+                    APICustomer.PostRequest<OrderBindingModel,
+                   bool>("api/Main/TakeOrderInWork", new OrderBindingModel
+                   {
+                       Id = id
+                   });
                     LoadData();
                 }
                 catch (Exception ex)
@@ -83,7 +79,11 @@ namespace AbstractSecurityShopView
                 int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                 try
                 {
-                    service.OrderReady(new OrderBindingModel { Id = id });
+                    APICustomer.PostRequest<OrderBindingModel,
+                   bool>("api/Main/FinishOrder", new OrderBindingModel
+                   {
+                       Id = id
+                   });
                     LoadData();
                 }
                 catch (Exception ex)
@@ -101,7 +101,11 @@ namespace AbstractSecurityShopView
                 int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                 try
                 {
-                    service.OrderPaid(new OrderBindingModel { Id = id });
+                    APICustomer.PostRequest<OrderBindingModel, bool>("api/Main/PayOrder",
+                   new OrderBindingModel
+                   {
+                       Id = id
+                   });
                     LoadData();
                 }
                 catch (Exception ex)
@@ -119,31 +123,31 @@ namespace AbstractSecurityShopView
 
         private void заказчикиToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<FormCustomers>();
+            var form = new FormCustomers();
             form.ShowDialog();
         }
 
         private void оборудованиеToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<FormEquipments>();
+            var form = new FormEquipments();
             form.ShowDialog();
         }
 
         private void техникаToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<FormTechnic>();
+            var form = new FormTechnics();
             form.ShowDialog();
         }
 
         private void хранилищеToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<FormStorages>();
+            var form = new FormStorages();
             form.ShowDialog();
         }
 
         private void пополнитьХранилищеToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<FormPutOnStorage>();
+            var form = new FormPutOnStorage();
             form.ShowDialog();
         }
 
@@ -157,10 +161,11 @@ namespace AbstractSecurityShopView
             {
                 try
                 {
-                    reptService.SaveTechnicsPrice(new ReptBindingModel
-                    {
-                        FileName = sfd.FileName
-                    });
+                    APICustomer.PostRequest<ReptBindingModel,
+                   bool>("api/Rept/SaveTechnicsPrice", new ReptBindingModel
+                   {
+                       FileName = sfd.FileName
+                   });
                     MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
                 }
@@ -169,18 +174,18 @@ namespace AbstractSecurityShopView
                     MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
                    MessageBoxIcon.Error);
                 }
-            }
+            }
         }
 
         private void загруженностьХранилищToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<FormStorageLoad>();
+            var form = new FormStorageLoad();
             form.ShowDialog();
         }
 
         private void заказыЗаказчиковToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<FormCustomerOrders>();
+            var form = new FormCustomers();
             form.ShowDialog();
         }
     }

@@ -3,22 +3,17 @@ using AbstractSecurityShopServiceDAL.Interface;
 using AbstractSecurityShopServiceDAL.ViewModel;
 using System;
 using System.Windows.Forms;
-using Unity;
 
 namespace AbstractSecurityShopView
 {
     public partial class FormCustomer : Form
     {
-        [Dependency]
-        public new IUnityContainer Container { get; set; }
         public int Id { set { id = value; } }
-        private readonly ICustomerService service;
         private int? id;
 
-        public FormCustomer(ICustomerService service)
+        public FormCustomer()
         {
             InitializeComponent();
-            this.service = service;
         }
 
         private void FormCustomer_Load(object sender, EventArgs e)
@@ -27,11 +22,9 @@ namespace AbstractSecurityShopView
             {
                 try
                 {
-                    CustomerViewModel view = service.GetElement(id.Value);
-                    if (view != null)
-                    {
-                        textBoxFIO.Text = view.CustomerFIO;
-                    }
+                    CustomerViewModel client =
+                   APICustomer.GetRequest<CustomerViewModel>("api/Customer/Get/" + id.Value);
+                    textBoxFIO.Text = client.CustomerFIO;
                 }
                 catch (Exception ex)
                 {
@@ -53,18 +46,20 @@ namespace AbstractSecurityShopView
             {
                 if (id.HasValue)
                 {
-                    service.UpdElement(new CustomerBindingModel
-                    {
-                        Id = id.Value,
-                        CustomerFIO = textBoxFIO.Text
-                    });
+                    APICustomer.PostRequest<CustomerBindingModel,
+                   bool>("api/Customer/UpdElement", new CustomerBindingModel
+                   {
+                       Id = id.Value,
+                       CustomerFIO = textBoxFIO.Text
+                   });
                 }
                 else
                 {
-                    service.AddElement(new CustomerBindingModel
-                    {
-                        CustomerFIO = textBoxFIO.Text
-                    });
+                    APICustomer.PostRequest<CustomerBindingModel,
+                   bool>("api/Customer/AddElement", new CustomerBindingModel
+                   {
+                       CustomerFIO = textBoxFIO.Text
+                   });
                 }
                 MessageBox.Show("Сохранение прошло успешно", "Сообщение",
                MessageBoxButtons.OK, MessageBoxIcon.Information);
