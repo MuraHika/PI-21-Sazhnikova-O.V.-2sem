@@ -149,7 +149,7 @@ namespace AbstractSecurityShopServiceImplementDataBase.Implementation
             }
             element.Status = OrderStatus.Paid;
             context.SaveChanges();
-            SendEmail(element.Customer.Mail, "Оповещение по заказам", string.Format("Заказ №{0} от {1} оплачен успешно", element.Id, element.DateCreate.ToShortDateString()));
+            SendEmail(element.Customer.Mail, "Оповещение по заказам", string.Format("Заказ №{0} от {1} оплачен успешно", element.Id, element.DateCreate.ToShortDateString()));
         }
 
         public void PutEquipmentOnStorage(StorageEquipmentBindingModel model)
