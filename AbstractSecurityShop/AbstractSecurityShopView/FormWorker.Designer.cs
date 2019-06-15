@@ -1,0 +1,97 @@
+﻿namespace AbstractSecurityShopView
+{
+    partial class FormWorker
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.buttonCancel = new System.Windows.Forms.Button();
+            this.buttonSave = new System.Windows.Forms.Button();
+            this.textBoxFIO = new System.Windows.Forms.TextBox();
+            this.labelFIO = new System.Windows.Forms.Label();
+            this.SuspendLayout();
+            // 
+            // buttonCancel
+            // 
+            this.buttonCancel.Location = new System.Drawing.Point(267, 47);
+            this.buttonCancel.Name = "buttonCancel";
+            this.buttonCancel.Size = new System.Drawing.Size(121, 32);
+            this.buttonCancel.TabIndex = 7;
+            this.buttonCancel.Text = "Отмена";
+            this.buttonCancel.UseVisualStyleBackColor = true;
+            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+            // 
+            // buttonSave
+            // 
+            this.buttonSave.Location = new System.Drawing.Point(140, 47);
+            this.buttonSave.Name = "buttonSave";
+            this.buttonSave.Size = new System.Drawing.Size(121, 32);
+            this.buttonSave.TabIndex = 6;
+            this.buttonSave.Text = "Сохранить";
+            this.buttonSave.UseVisualStyleBackColor = true;
+            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
+            // 
+            // textBoxFIO
+            // 
+            this.textBoxFIO.Location = new System.Drawing.Point(61, 12);
+            this.textBoxFIO.Name = "textBoxFIO";
+            this.textBoxFIO.Size = new System.Drawing.Size(327, 20);
+            this.textBoxFIO.TabIndex = 5;
+            // 
+            // labelFIO
+            // 
+            this.labelFIO.AutoSize = true;
+            this.labelFIO.Location = new System.Drawing.Point(10, 13);
+            this.labelFIO.Name = "labelFIO";
+            this.labelFIO.Size = new System.Drawing.Size(40, 13);
+            this.labelFIO.TabIndex = 4;
+            this.labelFIO.Text = "ФИО: ";
+            // 
+            // FormWorker
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(414, 106);
+            this.Controls.Add(this.buttonCancel);
+            this.Controls.Add(this.buttonSave);
+            this.Controls.Add(this.textBoxFIO);
+            this.Controls.Add(this.labelFIO);
+            this.Name = "FormWorker";
+            this.Text = "Сведения о работнике";
+            this.Load += new System.EventHandler(this.FormWorker_Load);
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.Button buttonCancel;
+        private System.Windows.Forms.Button buttonSave;
+        private System.Windows.Forms.TextBox textBoxFIO;
+        private System.Windows.Forms.Label labelFIO;
+    }
+}

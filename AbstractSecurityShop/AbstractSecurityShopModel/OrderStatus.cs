@@ -11,6 +11,7 @@ namespace AbstractSecurityShopModel
         Accepted = 0,
         Processed = 1,
         Ready = 2,
-        Paid = 3
+        Paid = 3,
+        NotEnoughRes = 4
     }
 }

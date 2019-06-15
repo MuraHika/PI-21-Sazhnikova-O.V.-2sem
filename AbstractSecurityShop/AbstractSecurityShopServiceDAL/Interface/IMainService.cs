@@ -11,6 +11,7 @@ namespace AbstractSecurityShopServiceDAL.Interface
     public interface IMainService
     {
         List<OrderViewModel> GetList();
+        List<OrderViewModel> GetFreeOrders();
         void AcceptedOrder(OrderBindingModel model);
         void Processed(OrderBindingModel model);
         void OrderReady(OrderBindingModel model);

@@ -17,6 +17,8 @@ namespace AbstractSecurityShopServiceDAL.BindingModel
         [DataMember]
         public int TechnicsId { get; set; }
         [DataMember]
+        public int? WorkerId { get; set; }
+        [DataMember]
         public int Count { get; set; }
         [DataMember]
         public int Sum { get; set; }

@@ -7,13 +7,13 @@ namespace AbstractSecurityShopServiceImplementDataBase.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class changeStorgeName : IMigrationMetadata
+    public sealed partial class InitialCreate : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(changeStorgeName));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialCreate));
         
         string IMigrationMetadata.Id
         {
-            get { return "201903221716357_changeStorgeName"; }
+            get { return "201905061125091_InitialCreate"; }
         }
         
         string IMigrationMetadata.Source

@@ -1,5 +1,7 @@
-﻿using AbstractSecurityShopServiceDAL.BindingModel;
+﻿using AbstractSecurityShopRestApi.Services;
+using AbstractSecurityShopServiceDAL.BindingModel;
 using AbstractSecurityShopServiceDAL.Interface;
+using AbstractSecurityShopServiceDAL.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +14,12 @@ namespace AbstractSecurityShopRestApi.Controllers
     public class MainController : ApiController
     {
         private readonly IMainService _service;
+        private readonly IWorkerService _serviceWorker;
 
-        public MainController(IMainService service)
+        public MainController(IMainService service, IWorkerService serviceWorker)
         {
             _service = service;
+            _serviceWorker = serviceWorker;
         }
 
         [HttpGet]
@@ -57,6 +61,21 @@ namespace AbstractSecurityShopRestApi.Controllers
         public void PutComponentOnStock(StorageEquipmentBindingModel model)
         {
             _service.PutEquipmentOnStorage(model);
+        }
+
+        [HttpPost]
+        public void StartWork()
+        {
+            List<OrderViewModel> orders = _service.GetFreeOrders();
+            foreach (var order in orders)
+            {
+                WorkerViewModel impl = _serviceWorker.GetFreeWorker();
+                if (impl == null)
+                {
+                    throw new Exception("Нет сотрудников");
+                }
+                new WorkWorker(_service, _serviceWorker, impl.Id, order.Id);
+            }
         }
     }
 }

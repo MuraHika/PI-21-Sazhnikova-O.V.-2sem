@@ -31,7 +31,8 @@ namespace AbstractSecurityShopView
                     dataGridView.DataSource = list;
                     dataGridView.Columns[0].Visible = false;
                     dataGridView.Columns[1].Visible = false;
-                    dataGridView.Columns[9].Visible = false;
+                    dataGridView.Columns[4].Visible = false;
+                    dataGridView.Columns[11].Visible = false;
                     dataGridView.Columns[1].AutoSizeMode =
                     DataGridViewAutoSizeColumnMode.Fill;
                 }
@@ -135,7 +136,7 @@ namespace AbstractSecurityShopView
 
         private void техникаToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = new FormTechnics();
+            var form = new FormTechnic();
             form.ShowDialog();
         }
 
@@ -188,5 +189,25 @@ namespace AbstractSecurityShopView
             var form = new FormCustomers();
             form.ShowDialog();
         }
+
+        private void работникиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = new FormWorkers();
+            form.ShowDialog();
+        }
+
+        private void запускРаботToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                APICustomer.PostRequest<int?, bool>("api/Main/StartWork", null);
+                MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
+
 }
